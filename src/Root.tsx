@@ -1,6 +1,7 @@
 import { Composition } from "remotion";
 import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
+import { BookedInDemo, bookedInSchema } from "./BookedInDemo";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -39,6 +40,20 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{
           logoColor1: "#91dAE2" as const,
           logoColor2: "#86A8E7" as const,
+        }}
+      />
+
+      {/* BookedIn.ai Product Demo */}
+      <Composition
+        id="BookedInDemo"
+        component={BookedInDemo}
+        durationInFrames={570}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={bookedInSchema}
+        defaultProps={{
+          accentColor: "#2563EB",
         }}
       />
     </>
