@@ -2,6 +2,7 @@ import { Composition } from "remotion";
 import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
 import { BookedInDemo, bookedInSchema } from "./BookedInDemo";
+import { BhagavataPradipika, bhagavataPradipikaSchema } from "./BhagavataPradipika";
 
 // Each <Composition> is an entry in the sidebar!
 
@@ -54,6 +55,21 @@ export const RemotionRoot: React.FC = () => {
         schema={bookedInSchema}
         defaultProps={{
           accentColor: "#2563EB",
+        }}
+      />
+
+      {/* Bhagavata Pradipika - January 2026 */}
+      <Composition
+        id="BhagavataPradipika"
+        component={BhagavataPradipika}
+        durationInFrames={2700}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={bhagavataPradipikaSchema}
+        defaultProps={{
+          primaryColor: "#F4A460",
+          accentColor: "#8B0000",
         }}
       />
     </>
