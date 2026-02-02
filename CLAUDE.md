@@ -6,11 +6,59 @@
 
 ## Project Overview
 
-**Remotion** project for creating programmatic videos using React.
+**Video Studio** - A web application for creating videos using AI chat and Remotion.
 
-- **Stack**: Remotion, React 19, TypeScript, Zod
-- **Dev server**: `npm run dev` → http://localhost:3000
+- **Stack**: Next.js 14, Remotion 4, React, TypeScript, Supabase, Google Gemini
+- **Web app**: `npm run dev` → http://localhost:3000
+- **Remotion Studio**: `npm run remotion:dev` → http://localhost:3001
 - **Render**: `npx remotion render <CompositionId> out/video.mp4`
+
+---
+
+## Architecture
+
+### Web App (`app/` directory)
+- **Next.js 14 App Router** with server and client components
+- **Authentication**: Supabase Auth (email/password + Google OAuth)
+- **Database**: Supabase PostgreSQL
+- **Storage**: Supabase Storage for video files
+- **AI Chat**: Google Gemini for video creation conversations
+
+### Remotion (`src/` directory)
+- Video compositions remain in `src/`
+- Compositions: HelloWorld, BookedInDemo, BhagavataPradipika
+
+### Key Directories
+```
+app/                  # Next.js web application
+├── (auth)/          # Login, signup pages
+├── (dashboard)/     # Protected dashboard, chat, library
+└── api/             # API routes (chat, render, sessions)
+
+components/          # React components
+lib/                 # Utilities (supabase, gemini, remotion)
+types/               # TypeScript types
+src/                 # Remotion compositions
+supabase/            # Database schema
+```
+
+---
+
+## Environment Variables
+
+Copy `.env.example` to `.env.local` and fill in:
+- `NEXT_PUBLIC_SUPABASE_URL` - Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Supabase anon key
+- `GOOGLE_GEMINI_API_KEY` - Google AI API key
+
+---
+
+## Database Setup
+
+1. Create a Supabase project at https://supabase.com
+2. Run `supabase/schema.sql` in the SQL editor
+3. Enable Google OAuth in Authentication > Providers (optional)
+4. Create a storage bucket named "videos"
 
 ---
 
@@ -74,11 +122,13 @@ const scale = spring({ frame, fps, config: { damping: 12, stiffness: 100 } });
 
 ## Services & Integrations
 
-*Add new services here as we integrate them.*
-
 | Service | Purpose | Notes |
 |---------|---------|-------|
 | GitHub | Version control | Push with descriptive commits |
+| Supabase | Auth, DB, Storage | PostgreSQL + Row Level Security |
+| Google Gemini | AI Chat | Video creation assistant |
+| Vercel | Deployment | Next.js hosting (planned) |
+| AWS Lambda | Video Rendering | Remotion Lambda (planned) |
 
 ---
 
@@ -98,3 +148,6 @@ const scale = spring({ frame, fps, config: { damping: 12, stiffness: 100 } });
 | Jan 2026 | Installed remotion-best-practices skill |
 | Jan 2026 | Created this CLAUDE.md file |
 | Jan 2026 | Added BhagavataPradipika video (90s, 7 scenes, spiritual magazine explainer) |
+| Feb 2026 | Added Video Studio web app with Next.js 14, Supabase Auth, Gemini chat |
+| Feb 2026 | Created dashboard, chat interface, video library pages |
+| Feb 2026 | Added composition registry for AI-powered video creation |
